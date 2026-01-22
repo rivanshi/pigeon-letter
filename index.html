@@ -68,132 +68,30 @@
 
 <!-- FOOTER -->
 <footer class="footer">
-    <div class="footer-left">
-      <img src="rivanshi.png" class="footer-avatar" alt="Rivanshi" />
-      <span>Made with love by Rivanshi</span>
-    </div>
-  
-    <div class="footer-right">
-      <span>Connect with me:</span>
-  
-      <a
-        href="https://instagram.com/rivan.sheee"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img src="instagram.png" class="social-icon" alt="Instagram" />
-      </a>
-  
-      <a
-        href="https://linkedin.com/in/rivanshi"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img src="linkedin.png" class="social-icon" alt="LinkedIn" />
-      </a>
-  
-      <a href="mailto:rivanshidesign@gmail.com">
-        <img src="mail.png" class="social-icon" alt="Email" />
-      </a>
-    </div>
-  </footer>
+  <div class="footer-left">
+    <img src="rivanshi.png" class="footer-avatar" crossorigin="anonymous" />
+    <span>Made with love by Rivanshi</span>
+  </div>
+
+  <div class="footer-right">
+    <span>Connect with me:</span>
+
+    <a href="https://instagram.com/rivan.sheee" target="_blank">
+      <img src="instagram.png" class="social-icon" crossorigin="anonymous" />
+    </a>
+
+    <a href="https://linkedin.com/in/rivanshi" target="_blank">
+      <img src="linkedin.png" class="social-icon" crossorigin="anonymous" />
+    </a>
+
+    <a href="mailto:rivanshidesign@gmail.com">
+      <img src="mail.png" class="social-icon" crossorigin="anonymous" />
+    </a>
+  </div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-
-<script>
-const mainBtn = document.getElementById("mainBtn");
-const saveBtn = document.getElementById("saveBtn");
-const editActions = document.getElementById("editActions");
-const postActions = document.getElementById("postActions");
-const addKissBtn = document.getElementById("addKissBtn");
-
-const title = document.getElementById("title");
-const body = document.getElementById("body");
-const signature = document.getElementById("signature");
-
-const widgetsLayer = document.getElementById("widgets-layer");
-
-let isEditing = false;
-
-/* ENTER EDIT MODE */
-mainBtn.onclick = () => {
-  isEditing = true;
-  mainBtn.classList.add("hidden");
-  editActions.classList.remove("hidden");
-  postActions.classList.add("hidden");
-
-  [title, body, signature].forEach(el => {
-    el.contentEditable = true;
-    el.innerText = "Write your message here...";
-  });
-};
-
-/* SAVE */
-saveBtn.onclick = () => {
-  isEditing = false;
-  editActions.classList.add("hidden");
-  mainBtn.classList.remove("hidden");
-  postActions.classList.remove("hidden");
-
-  [title, body, signature].forEach(el => el.contentEditable = false);
-};
-
-/* ADD KISS MARK */
-addKissBtn.onclick = () => {
-  if (!isEditing) return;
-
-  const kiss = document.createElement("img");
-  kiss.src = "kiss.png";
-  kiss.className = "kiss-widget";
-  kiss.style.left = "320px";
-  kiss.style.top = "220px";
-  kiss.dataset.scale = 1;
-  kiss.dataset.rotate = 0;
-
-  widgetsLayer.appendChild(kiss);
-  enableDrag(kiss);
-};
-
-function enableDrag(el) {
-  let dragging = false;
-  let offsetX, offsetY;
-
-  el.onmousedown = (e) => {
-    dragging = true;
-    offsetX = e.clientX - el.offsetLeft;
-    offsetY = e.clientY - el.offsetTop;
-    el.classList.add("active");
-  };
-
-  document.onmousemove = (e) => {
-    if (!dragging) return;
-    el.style.left = e.clientX - offsetX + "px";
-    el.style.top = e.clientY - offsetY + "px";
-  };
-
-  document.onmouseup = () => {
-    dragging = false;
-    el.classList.remove("active");
-  };
-
-  el.onwheel = (e) => {
-    e.preventDefault();
-    let scale = parseFloat(el.dataset.scale);
-    scale += e.deltaY * -0.001;
-    scale = Math.min(Math.max(scale, 0.4), 2);
-    el.dataset.scale = scale;
-    el.style.transform =
-      `rotate(${el.dataset.rotate}deg) scale(${scale})`;
-  };
-
-  el.ondblclick = () => {
-    let rotate = parseFloat(el.dataset.rotate) + 15;
-    el.dataset.rotate = rotate;
-    el.style.transform =
-      `rotate(${rotate}deg) scale(${el.dataset.scale})`;
-  };
-}
-</script>
+<script src="app.js"></script>
 
 </body>
 </html>
