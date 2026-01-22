@@ -1,0 +1,215 @@
+:root {
+    --ui-font: "DM Sans", sans-serif;
+  }
+  
+  /* =========================
+     PAGE
+  ========================= */
+  body {
+    margin: 0;
+    background: #f7f0e6;
+    font-family: "Cedarville Cursive", cursive;
+    overflow-x: hidden;
+  }
+  
+  /* =========================
+     TOP ACTIONS
+  ========================= */
+  .top-actions {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 12px;
+    z-index: 9999;
+  }
+  
+  .edit-actions {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .action-btn {
+    background: #f4a261;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-family: var(--ui-font);
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  
+  .action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  }
+  
+  .secondary-btn {
+    background: rgba(244, 162, 97, 0.6);
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  /* =========================
+     STAGE (CENTERED)
+  ========================= */
+  .stage {
+    position: relative;
+    width: 900px;
+    height: 650px;
+    margin: 20px auto;
+  }
+  
+  /* =========================
+     ENVELOPE
+  ========================= */
+  .envelope {
+    position: absolute;
+    width: 560px;
+    height: 400px;
+    background: url("envelope.png") no-repeat center / contain;
+  
+    top: 10px;
+    left:280px;
+    transform: translateX(-65%) rotate(-12deg);
+  
+    z-index: 1;
+  }
+  
+  /* =========================
+     LETTER
+  ========================= */
+  .letter {
+    position: absolute;
+    width: 720px;
+    height: 620px;
+  
+    top: 100px;
+    left: 450px;
+    transform: translateX(-35%) rotate(10deg);
+    z-index: 2;
+  }
+  
+  /* =========================
+     PAPER BACKGROUND
+  ========================= */
+  .paper-bg {
+    position: absolute;
+    inset: 0;
+    background: url("paper-texture.png") no-repeat center / contain;
+    pointer-events: none;
+  }
+  
+  /* =========================
+     TEXT SAFE AREA (CRITICAL)
+  ========================= */
+  .content {
+    position: relative;
+    z-index: 4;
+  
+    width: 520px;
+    height: 500px;
+  
+    margin: 0 auto;
+    padding-top: 20px;
+  
+    display: flex;
+    flex-direction: column;
+  
+    overflow: hidden; /* NEVER leak outside paper */
+  }
+  
+  /* =========================
+     TYPOGRAPHY
+  ========================= */
+  .letter h1 {
+    font-size: 28px;
+    margin-bottom: 16px;
+    word-break: break-word;
+  }
+  
+  .letter-body {
+    flex: 1;
+    font-size: 24px;
+    line-height: 1.8;
+  
+    overflow-y: auto;
+  
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+  }
+  
+  .signature {
+    font-size: 24px;
+    margin-top: 16px;
+    word-break: break-word;
+  }
+  
+  /* Subtle scrollbar */
+  .letter-body::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .letter-body::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
+  }
+  
+  /* =========================
+     WIDGETS LAYER
+  ========================= */
+  #widgets-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 3; /* ABOVE paper, BELOW text */
+    pointer-events: none;
+  }
+  
+  .kiss-widget {
+    position: absolute;
+    width: 120px;
+    pointer-events: auto;
+    cursor: grab;
+  }
+  
+  .kiss-widget.active {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* =========================
+     FOOTER (UNCHANGED)
+  ========================= */
+  .footer {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    font-family: var(--ui-font);
+    font-size: 14px;
+  }
+  
+  .footer-left,
+  .footer-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .footer-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+  }
+  
+  .social-icon {
+    width: 20px;
+    height: 20px;
+  }
