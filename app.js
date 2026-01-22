@@ -119,28 +119,45 @@ downloadBtn.onclick = async () => {
    COPY LINK (ROBUST)
 ========================= */
 copyLinkBtn.onclick = async () => {
-  const params = new URLSearchParams({
-    title: title.innerText,
-    body: body.innerText,
-    signature: signature.innerText
-  });
+    const params = new URLSearchParams({
+      title: encodeURIComponent(title.innerText),
+      body: encodeURIComponent(body.innerText),
+      signature: encodeURIComponent(signature.innerText)
+    });
+  
+    const shareURL =
+      window.location.origin +
+      window.location.pathname +
+      "?" +
+      params.toString();
+  
+    try {
+      await navigator.clipboard.writeText(shareURL);
+      alert("Link copied!");
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = shareURL;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      alert("Link copied!");
+    }
+  };
+  /* =========================
+   LOAD FROM SHARE LINK
+========================= */
+const urlParams = new URLSearchParams(window.location.search);
 
-  const shareURL =
-    window.location.origin +
-    window.location.pathname +
-    "?" +
-    params.toString();
+if (
+  urlParams.has("title") &&
+  urlParams.has("body") &&
+  urlParams.has("signature")
+) {
+  title.innerText = decodeURIComponent(urlParams.get("title"));
+  body.innerText = decodeURIComponent(urlParams.get("body"));
+  signature.innerText = decodeURIComponent(urlParams.get("signature"));
 
-  try {
-    await navigator.clipboard.writeText(shareURL);
-    alert("Link copied!");
-  } catch {
-    const textarea = document.createElement("textarea");
-    textarea.value = shareURL;
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand("copy");
-    document.body.removeChild(textarea);
-    alert("Link copied!");
-  }
-};
+  // Show post actions for shared links
+  postActions.classList.remove("hidden");
+}
